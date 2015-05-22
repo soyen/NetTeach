@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
+
+<dwr>
+
+  <allow>
+   <create javascript="DwrService" creator="spring">
+     <param name="beanName" value="dwrService"/>
+   </create>
+   <convert match="com.zdnf.model.*" converter="hibernate3"></convert>
+   <convert match="com.zdnf.util.PageModel" converter="bean"></convert>
+  </allow>
+
+</dwr>

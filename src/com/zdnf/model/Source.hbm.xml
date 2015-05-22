@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zdnf.model">
+	<class name="Source" table="t_source">
+	    <id name="id">
+	        <generator class="native"/>
+	    </id>
+	    <property name="fileName"/>
+	    <property name="fileContent" lazy="true" type="org.springframework.orm.hibernate3.support.BlobByteArrayType" length="10485760"/>
+	</class>
+	
+</hibernate-mapping>

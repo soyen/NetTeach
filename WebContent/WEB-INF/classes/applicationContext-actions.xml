@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+    
+   <!-- 管理员登录--> 
+    <bean name="/admin/adminLogin" class="com.zdnf.struts.action.AdminLoginAction">
+      <property name="adminDAO">
+   <ref bean="adminDAO"/>
+   </property>
+   </bean>
+
+   <!--管理公告 -->
+   <bean name="/admin/notice/adminNotice" class="com.zdnf.struts.action.AdminNoticeAction">
+      <property name="adminDocumentService">
+   <ref bean="adminDocumentService"/>
+   </property>
+   </bean>
+   
+   <!-- 管理课程 -->
+   <bean name="/admin/course/adminCourse" class="com.zdnf.struts.action.AdminCourseAction">
+      <property name="adminDocumentService">
+   <ref bean="adminDocumentService"/>
+   </property>
+   </bean>
+   
+   <!-- 管理资源-->
+   <bean name="/admin/source/adminSource" class="com.zdnf.struts.action.AdminSourceAction">
+     <property name="adminSourceService">
+      <ref bean="adminSourceService"/>
+     </property>
+    </bean>
+    <!-- 管理部门 -->
+    <bean name="/admin/department/adminDepartment" class="com.zdnf.struts.action.AdminDepartmentAction">
+     <property name="adminDeptService">
+      <ref bean="adminDeptService"/>
+     </property>
+    </bean>
+    <!-- 管理班级 -->
+    <bean name="/admin/classes/adminClasses" class="com.zdnf.struts.action.AdminClassesAction">
+     <property name="adminDeptService">
+      <ref bean="adminDeptService"/>
+     </property>
+    </bean>
+    <!-- 管理教师 -->
+    <bean name="/admin/teacher/adminTeacher" class="com.zdnf.struts.action.AdminTeacherAction">
+     <property name="adminUserService">
+      <ref bean="adminUserService"/>
+     </property>
+     <property name="adminDeptService">
+      <ref bean="adminDeptService"/>
+     </property>
+    </bean>
+    <!-- 管理学生 -->
+    <bean name="/admin/student/adminStudent" class="com.zdnf.struts.action.AdminStudentAction">
+     <property name="adminUserService">
+      <ref bean="adminUserService"/>
+     </property>
+     <property name="adminDeptService">
+      <ref bean="adminDeptService"/>
+     </property>
+    </bean>
+    
+   <!-- 教师登录--> 
+    <bean name="/teacherLogin" class="com.zdnf.struts.action.TeacherLoginAction">
+      <property name="teacherDAO">
+   <ref bean="teacherDAO"/>
+   </property>
+   </bean>
+   <!-- 教师公告 -->
+   <bean name="/teacher/notice/teacherNotice" class="com.zdnf.struts.action.TeacherNotcieAction">
+      <property name="teacherDocumentService">
+   <ref bean="teacherDocumentService"/>
+   </property>
+   </bean>
+   <!-- 教师个人资料 -->
+   <bean name="/teacher/info/teacherInfo" class="com.zdnf.struts.action.TeacherInfoAction">
+      <property name="teacherInfoService">
+   <ref bean="teacherInfoService"/>
+   </property>
+   </bean>
+   <!-- 教师资源-->
+   <bean name="/teacher/source/teacherSource" class="com.zdnf.struts.action.TeacherSourceAction">
+     <property name="teacherDocumentService">
+      <ref bean="teacherDocumentService"/>
+     </property>
+    </bean>
+     <!-- 教师课程 -->
+   <bean name="/teacher/course/teacherCourse" class="com.zdnf.struts.action.TeacherCourseAction">
+      <property name="teacherDocumentService">
+   <ref bean="teacherDocumentService"/>
+   </property>
+   </bean>
+   <!-- 教师习题 -->
+   <bean name="/teacher/homework/teacherQuestion" class="com.zdnf.struts.action.TeacherQuestionAction">
+      <property name="teacherHomeworkService">
+   <ref bean="teacherHomeworkService"/>
+   </property>
+   </bean>
+   <!-- 学生登录--> 
+    <bean name="/studentLogin" class="com.zdnf.struts.action.StudentLoginAction">
+      <property name="studentDAO">
+   <ref bean="studentDAO"/>
+   </property>
+    <property name="noticeDAO">
+   <ref bean="noticeDAO"/>
+   </property>
+   </bean>
+   <!-- 学生公告 -->
+   <bean name="/student/notice/studentNotice" class="com.zdnf.struts.action.StudentNoticeAction">
+      <property name="studentDocumentService">
+   <ref bean="studentDocumentService"/>
+   </property>
+   </bean>
+    <!-- 学生个人资料 -->
+   <bean name="/student/info/studentInfo" class="com.zdnf.struts.action.StudentInfoAction">
+      <property name="studentInfoService">
+   <ref bean="studentInfoService"/>
+   </property>
+   </bean>
+   <!-- 学生资源-->
+   <bean name="/student/source/studentSource" class="com.zdnf.struts.action.StudentSourceAction">
+     <property name="studentDocumentService">
+      <ref bean="studentDocumentService"/>
+     </property>
+    </bean>
+    <!-- 学生课程-->
+   <bean name="/student/course/studentCourse" class="com.zdnf.struts.action.StudentCourseAction">
+     <property name="studentDocumentService">
+      <ref bean="studentDocumentService"/>
+     </property>
+    </bean>
+    <!-- 学生习题-->
+   <bean name="/student/homework/studentHomework" class="com.zdnf.struts.action.StudentHomeworkAction">
+     <property name="studentHomeworkService">
+      <ref bean="studentHomeworkService"/>
+     </property>
+    </bean>
+ </beans>

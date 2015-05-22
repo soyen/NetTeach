@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	     xmlns:aop="http://www.springframework.org/schema/aop"
+	     xmlns:tx="http://www.springframework.org/schema/tx"
+	     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+    <!--资源DAO  -->
+    <bean id="sourceDAO" class="com.zdnf.dao.impl.SourceDAO">
+    <property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+    </bean>
+	<!--管理员DAO  -->
+	<bean id="adminDAO" class="com.zdnf.dao.impl.AdminDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!--公告DAO  -->
+	<bean id="noticeDAO" class="com.zdnf.dao.impl.NoticeDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!--课程DAO  -->
+	<bean id="courseDAO" class="com.zdnf.dao.impl.CourseDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!--部门DAO  -->
+	<bean id="departmentDAO" class="com.zdnf.dao.impl.DepartmentDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!--班级DAO  -->
+	<bean id="classesDAO" class="com.zdnf.dao.impl.ClassesDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!-- 教师DAO -->
+	<bean id="teacherDAO" class="com.zdnf.dao.impl.TeacherDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!-- 学生DAO -->
+	<bean id="studentDAO" class="com.zdnf.dao.impl.StudentDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!-- 问题DAO -->
+	<bean id="questionDAO" class="com.zdnf.dao.impl.QuestionDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+	<!-- 问题DAO -->
+	<bean id="answerDAO" class="com.zdnf.dao.impl.AnswerDAO">
+	<property name="sessionFactory">
+	<ref bean="sessionFactory"/>
+	</property>
+	</bean>
+		
+	
+	<!-- 公告课程业务 -->
+	<bean id="adminDocumentService" class="com.zdnf.service.impl.AdminDocumentService">
+	<property name="noticeDAO">
+	<ref bean="noticeDAO"/>
+	</property>
+	<property name="courseDAO">
+	<ref bean="courseDAO"/>
+	</property>
+	</bean>
+	<!-- 部门班级业务 -->
+	<bean id="adminDeptService" class="com.zdnf.service.impl.AdminDeptService">
+	<property name="departmentDAO">
+	<ref bean="departmentDAO"/>
+	</property>
+	<property name="classesDAO">
+	<ref bean="classesDAO"/>
+	</property>
+	</bean>
+	<!--资源业务  -->
+	<bean id="adminSourceService" class="com.zdnf.service.impl.AdminSourceService">
+	<property name="sourceDAO">
+	<ref bean="sourceDAO"/>
+	</property>
+    </bean>
+    <!-- 人员业务 -->
+    <bean id="adminUserService" class="com.zdnf.service.impl.AdminUserService">
+    <property name="teacherDAO">
+    <ref bean="teacherDAO"/>
+    </property>
+    <property name="studentDAO">
+    <ref bean="studentDAO"/>
+    </property>
+    <property name="departmentDAO">
+    <ref bean="departmentDAO"/>
+    </property>
+    <property name="classesDAO">
+    <ref bean="classesDAO"/>
+    </property>  
+    </bean>
+    
+    <!-- 教师文档业务 -->
+    <bean id="teacherDocumentService" class="com.zdnf.service.impl.TeacherDocumentService">
+    <property name="noticeDAO">
+    <ref bean="noticeDAO"/>
+    </property>
+    <property name="sourceDAO">
+    <ref bean="sourceDAO"/>
+    </property>
+    <property name="teacherDAO">
+    <ref bean="teacherDAO"/>
+    </property>
+    <property name="courseDAO">
+    <ref bean="courseDAO"/>
+    </property>
+    </bean>
+    <!-- 教师习题 -->
+    <bean id="teacherHomeworkService" class="com.zdnf.service.impl.TeacherHomeworkService">
+    <property name="questionDAO">
+    <ref bean="questionDAO"/>
+    </property>
+    <property name="courseDAO">
+    <ref bean="courseDAO"/>
+    </property>
+    <property name="teacherDAO">
+    <ref bean="teacherDAO"/>
+    </property>
+    <property name="answerDAO">
+    <ref bean="answerDAO"/>
+    </property>
+    </bean>
+  
+    <!-- 教师个人资料 -->
+    <bean id="teacherInfoService" class="com.zdnf.service.impl.TeacherInfoService">
+    <property name="teacherDAO">
+    <ref bean="teacherDAO"/>
+    </property>
+    </bean>
+    
+    <!-- 学生个人资料 -->
+    <bean id="studentInfoService" class="com.zdnf.service.impl.StudentInfoService">
+    <property name="studentDAO">
+    <ref bean="studentDAO"/>
+    </property>
+    </bean>
+    
+    <!-- 学生文档业务 -->
+    <bean id="studentDocumentService" class="com.zdnf.service.impl.StudentDocumentService">
+    <property name="noticeDAO">
+    <ref bean="noticeDAO"/>
+    </property>
+    <property name="sourceDAO">
+    <ref bean="sourceDAO"/>
+    </property>
+    <property name="teacherDAO">
+    <ref bean="teacherDAO"/>
+    </property>
+    <property name="courseDAO">
+    <ref bean="courseDAO"/>
+    </property>
+    <property name="studentDAO">
+    <ref bean="studentDAO"/>
+    </property>
+    </bean>
+    
+    <!-- 学生作业业务 -->
+    <bean id="studentHomeworkService" class="com.zdnf.service.impl.StudentHomeworkService">
+    <property name="courseDAO">
+    <ref bean="courseDAO"/>
+    </property>
+   <property name="questionDAO">
+    <ref bean="questionDAO"/>
+    </property>
+    <property name="answerDAO">
+    <ref bean="answerDAO"/>
+    </property> 
+    <property name="studentDAO">
+    <ref bean="studentDAO"/>
+    </property> 
+    </bean>
+  
+    
+     <!-- DWR业务 -->
+     <bean id="dwrService" class="com.zdnf.service.impl.DwrService">
+     <property name="departmentDAO">
+     <ref bean="departmentDAO"/>
+     </property>
+     <property name="teacherDAO">
+     <ref bean="teacherDAO"/>
+     </property>
+     <property name="courseDAO">
+     <ref bean="courseDAO"/>
+     </property>
+      <property name="studentDAO">
+     <ref bean="studentDAO"/>
+     </property>
+      <property name="classesDAO">
+     <ref bean="classesDAO"/>
+     </property>
+     </bean>
+    <!--上传下载语柄  -->
+    <bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" lazy-init="true"/>
+    <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
+	
+</beans>

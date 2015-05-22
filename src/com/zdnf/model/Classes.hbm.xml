@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zdnf.model">
+	<class name="Classes" table="t_classes">
+	    <id name="id">
+	        <generator class="native"/>
+	    </id>
+	    <property name="className"/>
+	    <property name="capacity"/>
+	    
+	    <set name="students" inverse="true" order-by="id asc" cascade="delete-orphan">
+	      <key column="classes_id"/>
+	      <one-to-many class="Student"/>
+	    </set>
+	    
+	    <many-to-one name="department" column="department_id"/>
+	    
+	</class>
+	
+</hibernate-mapping>

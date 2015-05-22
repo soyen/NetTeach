@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+    <form-bean name="noticeForm" type="com.zdnf.struts.form.NoticeForm" />
+    <form-bean name="adminForm" type="com.zdnf.struts.form.AdminLoginForm"/>
+    <form-bean name="courseForm" type="com.zdnf.struts.form.CourseForm"/>
+    <form-bean name="sourceForm" type="com.zdnf.struts.form.SourceForm"/>
+    <form-bean name="departmentForm" type="com.zdnf.struts.form.DepartmentForm"/>
+    <form-bean name="classesForm" type="com.zdnf.struts.form.ClassesForm"/>
+    <form-bean name="teacherForm" type="com.zdnf.struts.form.TeacherForm"/>
+    <form-bean name="studentForm" type="com.zdnf.struts.form.StudentForm"/>
+    <form-bean name="questionForm" type="com.zdnf.struts.form.QuestionForm"/>
+    <form-bean name="answerForm" type="com.zdnf.struts.form.AnswerForm"/>
+   
+   	</form-beans>
+	<global-exceptions>
+     <exception type="java.lang.Exception" key="file.io" path="/WEB-INF/jsp/error.jsp" scope="request"></exception> 
+	
+	</global-exceptions>
+	<global-forwards />
+	
+	
+	
+	<action-mappings>
+    
+       <!-- 注销 -->
+      <action path="/logout" type="com.zdnf.struts.action.LogoutAction"></action>
+      
+     <!-- 管理员登录 --> 
+      <action path="/admin/adminLogin" name="adminForm" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/WEB-INF/jsp/admin/main.jsp" />
+      <forward name="error" path="/admin/index.jsp"/>
+      </action>
+     
+      
+     <!-- 管理公告 -->
+      <action path="/admin/notice/adminNotice"  name="noticeForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/admin/notice/adminNotice.do?method=listNotice&amp;pageNo=1&amp;pageSize=3"/>
+      <forward name="error" path="/index.jsp" />
+      </action>
+      
+      <action path="/admin/notice/addNotice" name="noticeForm" forward="/WEB-INF/jsp/admin/notice/addNotice.jsp"/>
+      <action path="/admin/notice/queryNotice" name="noticeForm" forward="/WEB-INF/jsp/admin/notice/queryNotice.jsp" />
+    
+      
+      <!-- 管理课程 -->
+      <action path="/admin/course/adminCourse" name="courseForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method"    >
+      <forward name="success" path="/admin/course/adminCourse.do?method=listCourse&amp;pageNo=1&amp;pageSize=5"/>
+      <forward name="error" path="/index.jsp" />
+      </action>
+      
+      <action path="/admin/course/addCourse"  forward="/WEB-INF/jsp/admin/course/addCourse.jsp" name="courseForm"/>
+      <action path="/admin/course/queryCourse" forward="/WEB-INF/jsp/admin/course/queryCourse.jsp" name="courseForm"/>
+   
+    
+      <!-- 管理资源 -->
+      <action path="/admin/source/adminSource" name="sourceForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <exception type="java.lang.Exception" key="file.io" path="/WEB-INF/jsp/admin/source/addSource.jsp" scope="request"></exception>
+      <forward name="success" path="/admin/source/adminSource.do?method=listSource&amp;pageNo=1&amp;pageSize=5"/>
+      <forward name="error" path="/error.jsp" />
+      </action>
+       
+      <action path="/admin/source/addSource"  forward="/WEB-INF/jsp/admin/source/addSource.jsp" name="sourceForm"/>
+      <action path="/admin/source/querySource" forward="/WEB-INF/jsp/admin/source/querySource.jsp" name="sourceForm"/>
+     
+      
+      <!-- 部门管理 -->
+      <action path="/admin/department/adminDepartment"  name="departmentForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method" >
+      <forward name="success" path="/admin/department/adminDepartment.do?method=listDepartment&amp;pageNo=1&amp;pageSize=2"/>
+      <forward name="error" path="/index.jsp" />
+      </action>
+      
+      <action path="/admin/department/addDepartment" name="departmentForm" forward="/WEB-INF/jsp/admin/department/addDepartment.jsp"/>
+      <action path="/admin/department/queryDepartment" name="departmentForm" forward="/WEB-INF/jsp/admin/department/queryDepartment.jsp" />
+      
+      <!-- 管理班级 -->
+      <action path="/admin/classes/adminClasses" name="classesForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/admin/classes/adminClasses.do?method=listClasses&amp;pageNo=1&amp;pageSize=5"/>
+       </action>
+      <action path="/admin/classes/addClasses" name="classesForm" forward="/WEB-INF/jsp/admin/classes/addClasses.jsp"/>
+      <action path="/admin/classes/queryClasses" name="classesForm" forward="/WEB-INF/jsp/admin/classes/queryClasses.jsp" />
+      <action path="/admin/classes/listClass" name="classesForm" forward="/WEB-INF/jsp/admin/classes/listClass.jsp"/>
+      <!-- 管理教师 -->
+      <action path="/admin/teacher/adminTeacher" name="teacherForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <exception type="org.springframework.dao.DataIntegrityViolationException" key="addUser.error" path="/WEB-INF/jsp/admin/teacher/addTeacher.jsp" scope="request"></exception>
+      <exception type="java.lang.NumberFormatException" key="noDept.error" path="/WEB-INF/jsp/admin/teacher/addTeacher.jsp" scope="request"></exception>
+      <forward name="success" path="/admin/teacher/adminTeacher.do?method=listTeacher&amp;pageNo=1&amp;pageSize=5"/>
+       </action>
+      <action path="/admin/teacher/addTeacher" name="teacherForm" forward="/WEB-INF/jsp/admin/teacher/addTeacher.jsp"/>
+      <action path="/admin/teacher/queryTeacher" name="teacherForm" forward="/WEB-INF/jsp/admin/teacher/queryTeacher.jsp" />
+      <action path="/admin/teacher/listTeacher" name="teacherForm" forward="/WEB-INF/jsp/admin/teacher/listTeacher.jsp"/>
+      <!-- 管理学生 -->
+      <action path="/admin/student/adminStudent" name="studentForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <exception type="org.springframework.dao.DataIntegrityViolationException" key="addUser.error" path="/WEB-INF/jsp/admin/student/addStudent.jsp" scope="request"></exception>
+       <exception type="java.lang.NumberFormatException" key="noDept.error" path="/WEB-INF/jsp/admin/student/addStudent.jsp" scope="request"></exception>
+      <forward name="success" path="/admin/student/adminStudent.do?method=listStudent&amp;pageNo=1&amp;pageSize=5"/>
+       </action>
+      <action path="/admin/student/addStudent" name="studentForm" forward="/WEB-INF/jsp/admin/student/addStudent.jsp"/>
+      <action path="/admin/student/queryStudent" name="studentForm" forward="/WEB-INF/jsp/admin/student/queryStudent.jsp" />
+      <action path="/admin/student/listStudent" name="studentForm" forward="/WEB-INF/jsp/admin/student/listStudent.jsp"/>
+      
+      
+       <!-- 教师登录 --> 
+      <action path="/teacherLogin" name="teacherForm" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/WEB-INF/jsp/teacher/main.jsp" />
+      <forward name="error" path="/index.jsp"/>
+      </action>
+      
+      <!-- 教师公告 -->
+      <action path="/teacher/notice/teacherNotice" name="noticeForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/teacher/notice/teacherNotice.do?method=listNotice&amp;pageNo=1&amp;pageSize=5"/>
+      </action>
+      <action path="/teacher/notice/queryNotice" name="noticeForm" forward="/WEB-INF/jsp/teacher/notice/queryNotice.jsp" />
+      
+      <!-- 教师个人资料 -->
+      <action path="/teacher/info/teacherInfo" name="teacherForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/WEB-INF/jsp/teacher/main.jsp"/>
+      </action>
+      
+      <!-- 教师资源 -->
+      <action path="/teacher/source/teacherSource" name="sourceForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <exception type="java.lang.Exception" key="file.io" path="/WEB-INF/jsp/teacher/source/addSource.jsp" scope="request"></exception>
+      <forward name="success" path="/teacher/source/teacherSource.do?method=listSource&amp;pageNo=1&amp;pageSize=5"/>
+      <forward name="error" path="/error.jsp" />
+      </action>
+       
+      <action path="/teacher/source/addSource"  forward="/WEB-INF/jsp/teacher/source/addSource.jsp" name="sourceForm"/>
+      
+      <!-- 教师课程 -->
+      <action path="/teacher/course/teacherCourse" name="courseForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <exception type="org.springframework.dao.DataIntegrityViolationException" key="course.del" path="/teacher/course/teacherCourse.do?method=listCourse" scope="request"></exception>
+      <exception type="javax.servlet.ServletException" key="course.io" path="/WEB-INF/jsp/teacher/course/addCourse.jsp" scope="request"></exception>
+      <forward name="success" path="/teacher/course/teacherCourse.do?method=listCourse"/>
+      <forward name="error" path="/index.jsp" />
+      </action>
+      
+      <action path="/teacher/course/addCourse"  forward="/WEB-INF/jsp/teacher/course/addCourse.jsp" name="courseForm"/>
+      <action path="/teacher/course/queryCourse" forward="/WEB-INF/jsp/teacher/course/queryCourse.jsp" name="courseForm"/>
+      <!-- 教师习题 -->
+      <action path="/teacher/homework/teacherQuestion" name="questionForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/teacher/homework/teacherQuestion.do?method=listCourse"></forward>
+      </action>
+          
+      <!-- 学生登录 --> 
+      <action path="/studentLogin" name="teacherForm" type="org.springframework.web.struts.DelegatingActionProxy">
+      <forward name="success" path="/WEB-INF/jsp/student/main.jsp" />
+      <forward name="error" path="/index.jsp" />
+      </action>
+      
+      <!-- 学生公告 -->
+      <action path="/student/notice/studentNotice" name="noticeForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/student/notice/studentNotice.do?method=listNotice&amp;pageNo=1&amp;pageSize=5"/>
+      </action>
+      <action path="/student/notice/queryNotice" name="noticeForm" forward="/WEB-INF/jsp/student/notice/queryNotice.jsp" />
+      
+      <!-- 学生个人资料 -->
+      <action path="/student/info/studentInfo" name="studentForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <forward name="success" path="/WEB-INF/jsp/student/main.jsp"/>
+      </action>
+      
+      <!-- 学生资源 -->
+      <action path="/student/source/studentSource" name="sourceForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      <exception type="java.lang.Exception" key="file.io" path="/WEB-INF/jsp/teacher/source/addSource.jsp" scope="request"></exception>
+      <forward name="success" path="/student/source/studentSource.do?method=listSource&amp;pageNo=1&amp;pageSize=5"/>
+      <forward name="error" path="/error.jsp" />
+      </action>
+      <!-- 学生课程 -->
+      <action path="/student/course/studentCourse" name="courseForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      </action>
+      <action path="/student/course/listAllCourse" name="courseForm" forward="/WEB-INF/jsp/student/course/listCourses.jsp" />
+      
+      <!-- 学生习题 -->
+	  <action path="/student/homework/studentHomework" name="answerForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      </action>
+      <action path="/student/homework/listAllCourse" name="answerForm" forward="/WEB-INF/jsp/student/course/listCourses.jsp" />
+      
+      <!-- 课件演示 -->
+      <action path="/student/demo/listDemo" forward="/WEB-INF/jsp/student/demo/demo.jsp" />
+      <action path="/student/demo/demo1" forward="/WEB-INF/jsp/student/demo/demo1.jsp" />
+      <action path="/student/demo/demo2" forward="/WEB-INF/jsp/student/demo/demo2.jsp" />
+      <action path="/student/demo/demo3" forward="/WEB-INF/jsp/student/demo/demo3.jsp" />
+      <action path="/student/demo/demo4" forward="/WEB-INF/jsp/student/demo/demo4.jsp" />
+      <action path="/student/demo/demo5" forward="/WEB-INF/jsp/student/demo/demo5.jsp" />
+      <action path="/student/demo/demo6" forward="/WEB-INF/jsp/student/demo/demo6.jsp" />
+      <action path="/student/demo/back" forward="/WEB-INF/jsp/student/main.jsp" />
+      
+	  </action-mappings>
+	  
+
+	<message-resources parameter="com.zdnf.struts.ApplicationResources" />
+	  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">           
+	  <set-property  property="pathnames"  value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>     
+	  </plug-in>
+</struts-config>

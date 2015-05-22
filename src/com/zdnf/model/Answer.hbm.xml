@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zdnf.model">
+	<class name="Answer" table="t_answer">
+	    <id name="id">
+	        <generator class="native"/>
+	    </id>
+	    <property name="title" not-null="true"/>
+	    <property name="content" not-null="true"/>
+	    <property name="score"/>
+	    <many-to-one name="question" column="question_id"/>
+	    <many-to-one name="Student" column="student_id"/>
+	    
+	</class>
+	
+</hibernate-mapping>

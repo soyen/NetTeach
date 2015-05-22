@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.zdnf.model">
+	<class name="Course" table="t_course">
+	    <id name="id">
+	        <generator class="native"/>
+	    </id>
+	    <property name="courseName"/>
+	    <property name="info"/>
+	    <property name="fileContent" lazy="true" type="org.springframework.orm.hibernate3.support.BlobByteArrayType" length="10485760"/>
+	    <property name="fileName"/>
+	    <set name="students" table="t_student_course" inverse="true" cascade="save-update" order-by="course_id asc">
+	      <key column="course_id" />
+	      <many-to-many class="Student" column="student_id"/>
+	    </set>
+	    <many-to-one name="teacher" column="teacher_id"/>
+	    <set name="questions" inverse="true" order-by="id asc" cascade="delete-orphan">
+	      <key column="course_id"/>
+	      <one-to-many class="Question"/>
+	    </set>
+	</class>
+	
+</hibernate-mapping>
