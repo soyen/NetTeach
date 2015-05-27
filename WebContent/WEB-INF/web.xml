@@ -75,6 +75,15 @@
    <url-pattern>/android/login.jsp</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>noticeList</servlet-name>
+   <servlet-class>com.zdnf.servlet.NoticeListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+   <servlet-name>noticeList</servlet-name>
+   <url-pattern>/android/noticeList.jsp</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

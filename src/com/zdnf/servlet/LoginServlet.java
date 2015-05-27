@@ -18,7 +18,7 @@ import com.zdnf.util.Constant;
 
 /**
  * Description:
- * <br/>网站: <a href="http://www.crazyit.org">疯狂Java联盟</a>
+ * <br/>锟斤拷站: <a href="http://www.crazyit.org">锟斤拷锟絁ava锟斤拷锟斤拷</a>
  * <br/>Copyright (C), 2001-2014, Yeeku.H.Lee
  * <br/>This program is protected by copyright laws.
  * <br/>Program Name:
@@ -40,11 +40,11 @@ public class LoginServlet extends BaseServlet
 		
 		switch (Integer.parseInt(userType)) {
 		case 1:
-			// 获取studentDAO
+			// 鑾峰彇studentDAO
 			IStudentDAO studentDAO = (IStudentDAO)getCtx().getBean("studentDAO");
-			// 验证用户登录			
+			// 楠岃瘉		
 			Student student = studentDAO.validate(username, password);
-			// 登录成功
+			// 楠岃瘉鎴愬姛
 			if (student != null)
 			{
 				id = student.getId();
@@ -52,11 +52,11 @@ public class LoginServlet extends BaseServlet
 			}
 			break;
 		case 2:
-			// 获取studentDAO
+			// 鑾峰彇studentDAO
 			ITeacherDAO teacherDAO = (ITeacherDAO)getCtx().getBean("teacherDAO");
-			// 验证用户登录			
+			//楠岃瘉		
 			Teacher teacher = teacherDAO.validate(username, password);
-			// 登录成功
+			// 楠岃瘉鎴愬姛
 			if (teacher != null)
 			{
 				id = teacher.getId();
@@ -64,11 +64,11 @@ public class LoginServlet extends BaseServlet
 			}		
 			break;
 		case 3:
-			// 获取adminDAO
+			// 鑾峰彇adminDAO
 			IAdminDAO adminDAO = (IAdminDAO)getCtx().getBean("adminDAO");
-			// 验证用户登录			
+			//楠岃瘉		
 			Admin admin = adminDAO.validate(username, password);
-			// 登录成功
+			// 楠岃瘉鎴愬姛
 			if (admin != null)
 			{
 				id = admin.getId();
@@ -77,13 +77,12 @@ public class LoginServlet extends BaseServlet
 	        break;
 
 		}		
-		response.setContentType("text/html; charset=GBK");		
+		response.setContentType("text/html; charset=UTF-8");		
 		try
 		{
-			// 把验证的userId封装成JSONObject
+			//
 			JSONObject jsonObj = new JSONObject().put("id" , id);
-
-			// 输出响应
+			//
 			response.getWriter().println(jsonObj.toString());
 		}
 		catch (JSONException ex)
