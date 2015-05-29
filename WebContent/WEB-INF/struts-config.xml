@@ -185,6 +185,10 @@
       <action path="/student/demo/demo6" forward="/WEB-INF/jsp/student/demo/demo6.jsp" />
       <action path="/student/demo/back" forward="/WEB-INF/jsp/student/main.jsp" />
       
+      <!-- android公告 -->
+      <action path="/android/notice"  name="noticeForm" type="org.springframework.web.struts.DelegatingActionProxy" parameter="method">
+      </action>
+      
 	  </action-mappings>
 	  
 

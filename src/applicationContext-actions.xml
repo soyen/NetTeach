@@ -141,4 +141,11 @@
       <ref bean="studentHomeworkService"/>
      </property>
     </bean>
+    
+    <!--android公告 -->
+   <bean name="/android/notice" class="com.zdnf.android.action.AndroidNoticeAction">
+    <property name="noticeDAO">
+   <ref bean="noticeDAO"/>
+   </property>
+   </bean>
  </beans>
